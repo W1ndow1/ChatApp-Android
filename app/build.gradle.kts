@@ -2,15 +2,16 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
-    namespace = "com.example.chatapp"
+    namespace = "com.G2.chatapp"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.chatapp"
-        minSdk = 24
+        applicationId = "com.G2.chatapp"
+        minSdk = 23
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -40,7 +41,10 @@ android {
 }
 
 dependencies {
-
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation("com.google.firebase:firebase-bom:33.12.0")
+    implementation("com.google.firebase:firebase-auth:23.2.0")
+    implementation("io.coil-kt:coil-compose:2.7.0")
     implementation("androidx.navigation:navigation-compose:2.8.9")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     implementation(libs.androidx.core.ktx)
@@ -51,6 +55,11 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.firebase.auth)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+    implementation(libs.firebase.firestore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.G2.chatapp" />
+                  <option name="mobileSdkAppId" value="1:499618883509:android:dda9a3d890a8eb27739bfc" />
+                  <option name="projectId" value="swiftui-firebase-chetapp" />
+                  <option name="projectNumber" value="499618883509" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
