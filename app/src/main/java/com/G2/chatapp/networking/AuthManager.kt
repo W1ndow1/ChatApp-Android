@@ -1,11 +1,14 @@
 package com.G2.chatapp.networking
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import com.google.firebase.auth.FirebaseAuth
 
 object AuthManager {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    val id: String?
-        get() =  auth.currentUser?.uid.toString()
+    var id =  auth.currentUser?.uid
+        private set
 
     fun signIn(email: String, password: String, onResult: (Boolean, String?) -> Unit) {
         auth.signInWithEmailAndPassword(email, password)
@@ -22,7 +25,8 @@ object AuthManager {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    onResult(true, auth.currentUser?.email)
+                    id = auth.currentUser?.uid
+                    onResult(true, auth.currentUser?.uid)
                 } else {
                     onResult(false, task.exception?.message)
                 }

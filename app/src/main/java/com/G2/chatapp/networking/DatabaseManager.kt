@@ -1,14 +1,14 @@
 package com.G2.chatapp.networking
 
+import android.R
 import com.G2.chatapp.models.ChatUser
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
-import com.google.firebase.firestore.toObject
 import kotlinx.coroutines.tasks.await
 
 object DatabaseManager {
 
-    val db = Firebase.firestore
+    private val db = Firebase.firestore
 
     fun collectionChatUsers(onResult: (List<ChatUser>) -> Unit) {
         db.collection("users").get()
@@ -40,5 +40,17 @@ object DatabaseManager {
     suspend fun collectionFavoriteUsers(uid: String): List<String> {
         val snapshot = db.collection("favorites").document(uid).get().await()
         return snapshot.get("favoriteChatRooms") as? List<String> ?: emptyList()
+    }
+
+    fun storeUserInfo(user: ChatUser, onResult: (Boolean, String?) -> Unit) {
+        db.collection("users").document(user.uid)
+            .set(user)
+            .addOnSuccessListener {
+                onResult(true, "등록성공")
+
+            }
+            .addOnFailureListener { error ->
+                onResult(false, error.message)
+            }
     }
 }

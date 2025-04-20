@@ -1,5 +1,6 @@
 package com.G2.chatapp.ui.regist
 
+import android.graphics.drawable.shapes.RoundRectShape
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -22,20 +23,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
+import com.G2.chatapp.viewModel.LoginViewModel
 
 
 @Composable
-fun RegistHeaderSection() {
-    var selectedImageUri by remember { mutableStateOf<Uri?>(null) }
+fun RegistHeaderSection(
+    viewModel: LoginViewModel
+) {
     var isImagePicked by remember { mutableStateOf(false) }
     val imagePickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
         if(uri != null) {
-            selectedImageUri = uri
+            viewModel.image = uri
             isImagePicked = true
         }
     }
@@ -45,21 +49,19 @@ fun RegistHeaderSection() {
             .size(150.dp)
             .clip(CircleShape)
             .background(Color.LightGray)
-            .then(
-               if(!isImagePicked) Modifier.clickable {
-                   imagePickerLauncher.launch("image/*")
-               } else Modifier
-            ),
+            .clickable {
+                imagePickerLauncher.launch("image/*")
+            },
         contentAlignment = Alignment.Center
     ) {
-        if (selectedImageUri != null) {
+        if (viewModel.image != null) {
             Image(
-                painter = rememberAsyncImagePainter(selectedImageUri),
+                painter = rememberAsyncImagePainter(viewModel.image),
                 contentDescription = "이미지를 선택하세요",
                 modifier = Modifier
                     .size(200.dp)
-                    .clip(RoundedCornerShape(16.dp))
-                    .border(2.dp, Color.Gray, RoundedCornerShape(16.dp)),
+                    .clip(CircleShape)
+                    .border(4.dp, Color.Gray, CircleShape),
                 contentScale = ContentScale.Crop
             )
         } else {
