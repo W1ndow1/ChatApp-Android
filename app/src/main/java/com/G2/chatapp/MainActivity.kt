@@ -8,17 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navOptions
 import androidx.navigation.navigation
 import com.G2.chatapp.ui.core.HomeTabScreen
 import com.G2.chatapp.ui.login.LoginScreen
 import com.G2.chatapp.ui.regist.RegistScreen
-import com.G2.chatapp.ui.sub.SettingScreen
 import com.G2.chatapp.viewModel.LoginViewModel
 
 class MainActivity : ComponentActivity() {
@@ -55,7 +52,7 @@ fun AppNavHost(
 
 //메인 네비게이트
 fun NavGraphBuilder.mainGraph(
-    navController: NavController,
+    navController: NavController, //=> 채팅방 이동시 사용할 예정
     viewModel: LoginViewModel
 ) {
     navigation(startDestination = "home", route = "main_graph") {

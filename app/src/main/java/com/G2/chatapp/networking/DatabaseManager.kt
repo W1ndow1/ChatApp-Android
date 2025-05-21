@@ -1,6 +1,5 @@
 package com.G2.chatapp.networking
 
-import android.R
 import com.G2.chatapp.models.ChatUser
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
@@ -47,7 +46,6 @@ object DatabaseManager {
             .set(user)
             .addOnSuccessListener {
                 onResult(true, "등록성공")
-
             }
             .addOnFailureListener { error ->
                 onResult(false, error.message)

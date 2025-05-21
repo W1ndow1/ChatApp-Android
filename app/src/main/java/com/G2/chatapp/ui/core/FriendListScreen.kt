@@ -31,11 +31,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.G2.chatapp.models.ChatUser
 import com.G2.chatapp.networking.AuthManager
 import com.G2.chatapp.viewModel.FriendListViewModel
@@ -133,9 +135,13 @@ fun UserRow(user: ChatUser) {
             .padding(top = 5.dp)
     ) {
         AsyncImage(
-            model = user.profileImageURL,
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(user.profileImageURL)
+                .size(50)
+                .crossfade(true)
+                .build(),
             contentDescription = "프로필 이미지",
-            contentScale = ContentScale.FillBounds,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(50.dp)
                 .border(

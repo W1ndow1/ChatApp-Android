@@ -9,7 +9,7 @@ object StorageManager {
     private val storageRef = Firebase.storage.reference
 
     fun uploadProfilePhoto(uid: String, image: Uri, onComplete:(Boolean, String?) -> Unit) {
-        val ref = storageRef.child("images/${uid}.jpeg")
+        val ref = storageRef.child("images/users/${uid}.jpeg")
         val uploadTask = ref.putFile(image)
 
         uploadTask
